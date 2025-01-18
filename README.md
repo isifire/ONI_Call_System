@@ -1,9 +1,17 @@
+# ONI Call System
+Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y aprender como se realiza Spoofing Telefónico, Smishing y clonación de voces con IA, aquí se recopilan los diferentes
+materiales utilizados para el trabajo. 
+
+Creditos a:
+- RonR, por diseñar e implementar el instalador automatizado para FreePBX en Raspberry Pi además de ser un miembro activo de ambas comunidades
+
+
 # Instalación de FreePBX en Raspberry Pi
 
 Este script (`install`) y el archivo comprimido (`install.tar.gz`) permiten construir FreePBX (versiones 15, 16 o 17) junto con Asterisk (versiones 18, 20, 21 o 22) en un Raspberry Pi. También se instalarán **iptables**, **dnsmasq** y **exim4**.  
 **Tiempo estimado de instalación:** Aproximadamente 15 minutos en un Raspberry Pi 5.
 
----
+
 
 ## Requisitos previos
 
@@ -28,7 +36,7 @@ Este script (`install`) y el archivo comprimido (`install.tar.gz`) permiten cons
 
 5. Inserta la tarjeta SD y enciende el Raspberry Pi.
 
----
+
 
 ## Instalación
 
@@ -52,7 +60,6 @@ Este script (`install`) y el archivo comprimido (`install.tar.gz`) permiten cons
    sudo ./install
    ```
 
----
 
 ## Opciones recomendadas durante la instalación
 
@@ -72,7 +79,7 @@ Durante la ejecución del script, se te pedirá configurar varios parámetros. A
 10. **Expandir el sistema de archivos:** Selecciona esta opción para aprovechar todo el espacio de la tarjeta SD.
 11. **Reiniciar:** Responde "No" para finalizar la configuración antes de reiniciar.
 
----
+
 
 ## Finalización de la instalación
 
@@ -85,7 +92,7 @@ Durante la ejecución del script, se te pedirá configurar varios parámetros. A
 3. **Scripts adicionales:**  
    Algunos scripts útiles se encuentran en el directorio `/root` para gestionar utilidades y configuraciones adicionales.
 
----
+
 
 ## Configuración de Google Voice SIP (GVSIP)
 
@@ -122,7 +129,7 @@ Para usar troncos de Google Voice con FreePBX:
    fwconsole restart
    ```
 
----
+
 
 ## Notas finales
 
