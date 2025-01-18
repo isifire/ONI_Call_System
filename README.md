@@ -1,6 +1,7 @@
-# ONI Call System
+# ONI Call System - TFG en Ingeniería Informática en TI
+![Texto alternativo](img/oni_logo.webp "Título opcional")
 
-Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y aprender cómo se realiza Spoofing Telefónico, Smishing y clonación de voces con IA. Aquí se recopilan los diferentes materiales utilizados para el trabajo.
+Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y aprender cómo se realizan las técnicas de Caller ID Spoofing, Smishing y clonación de voces con IA. Aquí se recopilan los diferentes materiales utilizados para el trabajo.
 
 
 
