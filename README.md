@@ -1,143 +1,119 @@
 # ONI Call System
-Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y aprender como se realiza Spoofing Telefónico, Smishing y clonación de voces con IA, aquí se recopilan los diferentes
-materiales utilizados para el trabajo. 
 
-Creditos a:
-- RonR, por diseñar e implementar el instalador automatizado para FreePBX en Raspberry Pi además de ser un miembro activo de ambas comunidades
+Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y aprender cómo se realiza Spoofing Telefónico, Smishing y clonación de voces con IA. Aquí se recopilan los diferentes materiales utilizados para el trabajo.
 
 
-# Instalación de FreePBX en Raspberry Pi
 
-Este script (`install`) y el archivo comprimido (`install.tar.gz`) permiten construir FreePBX (versiones 15, 16 o 17) junto con Asterisk (versiones 18, 20, 21 o 22) en un Raspberry Pi. También se instalarán **iptables**, **dnsmasq** y **exim4**.  
+# Índice
+1. [Instalación de FreePBX en Raspberry Pi](#1-instalación-de-freepbx-en-raspberry-pi)
+2. [Configuración adicional](#2-configuración-adicional)
+3. [Licencia](#3-licencia)
+4. [Contribuciones](#4-contribuciones)
+5. [Créditos](5#-creditos)
+6. [Contacto](#6-contacto)
+
+## 1. Instalación de FreePBX en Raspberry Pi
+
+Este script (`install`) y el archivo comprimido (`install.tar.gz`) permiten construir FreePBX (versiones 15, 16 o 17) junto con Asterisk (versiones 18, 20, 21 o 22) en un Raspberry Pi. También se instalarán **iptables**, **dnsmasq** y **exim4**.
+
 **Tiempo estimado de instalación:** Aproximadamente 15 minutos en un Raspberry Pi 5.
 
+### Requisitos
 
+#### Hardware
+- Raspberry Pi 5 (recomendado) o similar.
+- Tarjeta SD de 8 GB o más.
+- Conexión LAN mediante cable Ethernet.
 
-## Requisitos previos
+#### Software
+- Imagen Raspberry Pi OS Lite (32-bit/64-bit Bullseye o Bookworm).
+- Herramientas para escribir la imagen en la tarjeta SD:
+  - [Etcher](https://etcher.io/)
+  - [imageUSB](http://osforensics.com/downloads/imageusb.zip)
+- Cliente SSH como [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
+- Cliente SCP como [WinSCP](https://winscp.net/eng/download.php).
 
-1. **Descargar Raspberry Pi OS Lite** (32 bits o 64 bits, versiones Bullseye o Bookworm):  
-   - [Descargar desde aquí](https://www.raspberrypi.com/software/operating-systems/).
+### Proceso de instalación
 
-2. **Escribir la imagen en una tarjeta SD de al menos 8 GB**:  
-   - Herramientas recomendadas:  
-     - [Etcher](https://etcher.io/)  
-     - [imageUSB](http://osforensics.com/downloads/imageusb.zip)
+#### Paso 1: Preparación del sistema
+1. Descarga e instala la imagen Raspberry Pi OS Lite en una tarjeta SD.
+2. Crea un archivo vacío llamado `ssh` en el directorio `/boot/`.
+3. Crea un archivo de texto llamado `userconf` en el directorio `/boot/` con el siguiente contenido:
 
-3. **Preparar la tarjeta SD**:
-   - Crea un archivo vacío llamado `ssh` en el directorio `/boot/`.  
-     Comando en Windows: `type NUL > ssh`  
-     Comando en Linux/Mac: `touch /boot/ssh`
-   - Crea un archivo llamado `userconf` en el directorio `/boot/` con el siguiente contenido:  
-     ```
-     pi:$6$c70VpvPsVNCG0YR5$l5vWWLsLko9Kj65gcQ8qvMkuOoRkEagI90qi3F/Y7rm8eNYZHW8CY6BOIKwMH7a3YYzZYL90zf304cAHLFaZE0
-     ```
+   ```plaintext
+   pi:$6$c70VpvPsVNCG0YR5$l5vWWLsLko9Kj65gcQ8qvMkuOoRkEagI90qi3F/Y7rm8eNYZHW8CY6BOIKwMH7a3YYzZYL90zf304cAHLFaZE0
+   ```
+5. Inserta la tarjeta SD en la Raspberry Pi y conéctala a tu LAN.
+6. Enciende la Raspberry Pi.
 
-4. Conecta el Raspberry Pi a la red local mediante un cable Ethernet.
+#### Paso 2: Copiar archivos de instalación
+1. Copia los archivos `install` e `install.tar.gz` al directorio `/home/pi` de la Raspberry Pi usando WinSCP.
 
-5. Inserta la tarjeta SD y enciende el Raspberry Pi.
-
-
-
-## Instalación
-
-### Paso 1: Transferir los archivos al Raspberry Pi
-1. Copia los archivos `install` y `install.tar.gz` al directorio `/home/pi` en el Raspberry Pi.
-   - Herramienta recomendada: [WinSCP](https://winscp.net/eng/download.php).
-
-### Paso 2: Conectarse al Raspberry Pi
-1. Usa un cliente SSH para iniciar sesión en el Raspberry Pi con las credenciales:
-   - Usuario: `pi`
-   - Contraseña: `raspberry`
-   - Herramienta recomendada: [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
-
-### Paso 3: Ejecutar el script de instalación
-1. Haz que el script sea ejecutable:
+#### Paso 3: Ejecutar instalación
+1. Accede a la Raspberry Pi vía SSH usando las credenciales `pi:raspberry`.
+2. Haz el script ejecutable:
+   
    ```bash
    chmod +x install
    ```
-2. Ejecuta el script como superusuario:
+4. Ejecuta el script:
+   
    ```bash
    sudo ./install
    ```
+6. Sigue las indicaciones:
+   - Configura la contraseña del usuario `pi` y del usuario `root`.
+   - Selecciona las versiones de FreePBX y Asterisk.
+   - Responde las opciones de Edge e IPv6 ("No" recomendado).
+   - Configura el nombre de host, idioma, zona horaria y expande el sistema de archivos.
+   - Selecciona "Finish" sin reiniciar.
+7. Reinicia manualmente la Raspberry Pi.
+8. Inicia sesión como `root` y completa la instalación.
+9. Configura de forma básica FreePBX siguiendo los pasos establecidos en la interfaz web.
+10. Acceder a Configuraciones -> Configuraciones Asterisk SIP -> Configuraciones NAT y la nuestra red local en la que se encuentra el servidor, sin ello los prefijos SIP no funcionarán.
 
 
-## Opciones recomendadas durante la instalación
+## 2. Configuración adicional
 
-Durante la ejecución del script, se te pedirá configurar varios parámetros. Aquí están las opciones recomendadas:
+### Configuración de GVSIP
 
-1. **Contraseña del usuario `pi`:** Configura una contraseña segura.
-2. **Contraseña del usuario `root`:** Configura una contraseña segura.
-3. **Selecciona la versión de FreePBX:** Elige la última versión disponible.
-4. **Selecciona la versión de Asterisk:** Elige la versión recomendada por el script (habitualmente la más reciente).
-5. **Opción Edge:** Responde "No" si no necesitas características experimentales.
-6. **Opción IPv6:** Responde "No" a menos que uses IPv6 en tu red.
-7. **Revisar las selecciones:** Confirma que todas las configuraciones sean correctas.
-8. **Configurar el nombre del host:** Cambia el nombre del host a `FreePBX` (opcional).
-9. **Opciones de localización:**
-   - **Idioma:** Configura la localización adecuada (por ejemplo, `es_ES.UTF-8` para español).
-   - **Zona horaria:** Configura tu zona horaria (por ejemplo, `Europe/Madrid`).
-10. **Expandir el sistema de archivos:** Selecciona esta opción para aprovechar todo el espacio de la tarjeta SD.
-11. **Reiniciar:** Responde "No" para finalizar la configuración antes de reiniciar.
-
-
-
-## Finalización de la instalación
-
-1. **Reinicia el Raspberry Pi:**  
-   Después de completar la instalación inicial, reinicia el sistema y vuelve a iniciar sesión como `root`.
-
-2. **Verificar la instalación:**  
-   La instalación se completará automáticamente y el sistema se reiniciará nuevamente.
-
-3. **Scripts adicionales:**  
-   Algunos scripts útiles se encuentran en el directorio `/root` para gestionar utilidades y configuraciones adicionales.
-
-
-
-## Configuración de Google Voice SIP (GVSIP)
-
-Para usar troncos de Google Voice con FreePBX:
-
-1. Configura las opciones de SIP en FreePBX:
-   - **Configuración avanzada > Dialplan y operación:**  
-     - `SIP Channel Driver = both`
-   - **Asterisk SIP Settings > General SIP Settings:**  
-     - `STUN Server Address = stun.l.google.com:19302`
-   - Configura los puertos de escucha en las pestañas correspondientes:
-     - PJSIP (UDP): 5060
-     - PJSIP (TLS): 5061
-     - Chan SIP (UDP): 5160
-     - Chan SIP (TLS): 5161
-
-2. Carga y configura certificados:
-   - Instala el módulo **Certificate Manager**.
-   - Mueve los certificados a `/etc/asterisk/keys/`:
-     ```bash
-     mv /root/obihai.* /etc/asterisk/keys/
-     chown asterisk:asterisk /etc/asterisk/keys/obihai*
-     ```
-   - Importa los certificados en FreePBX:
-     - Ve a **Administración > Certificate Management > Importar Localmente**.
-
-3. Configura el archivo `gvsip.dat` con tus credenciales de Google Voice y cópialo:
-   ```bash
-   cp gvsip.dat /etc/asterisk/pjsip_custom_post.conf
-   ```
-
-4. Reinicia Asterisk:
+1. Configura el servidor STUN: `stun.l.google.com:19302`.
+2. Habilita los controladores de canales SIP adecuados (PJSIP).
+3. Importa el certificado necesario para TLS/SSL desde la herramienta Certificate Manager.
+4. Crea y edita el archivo `gvsip.dat` con la información de tu cuenta de Google Voice.
+5. Copia `gvsip.dat` a `/etc/asterisk/pjsip_custom_post.conf`.
+6. Reinicia FreePBX:
+   
    ```bash
    fwconsole restart
    ```
 
+### Configuración del servidor de fax HylaFAX
+
+1. Ejecuta el script de instalación:
+   
+   ```bash
+   ./install-fax
+   ```
+3. Añade extensiones de fax:
+   
+   ```bash
+   ./add-fax-extension
+   ```
+5. Configura el cliente SendFax para enviar faxes desde Windows.
 
 
-## Notas finales
+## 3. Licencia
+Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
-- **Acceso a la interfaz de FreePBX:**  
-  Abre un navegador web y accede a la dirección IP del Raspberry Pi.
 
-- **Mantenimiento:**  
-  Utiliza los scripts disponibles en `/root` para gestionar y actualizar el sistema.
+## 4. Contribuciones
 
-Si necesitas ayuda adicional, revisa la documentación oficial de FreePBX o comunícate con el administrador del sistema.
+Las contribuciones son bienvenidas. Por favor, abre un *issue* o envía un *pull request* con tus mejoras o correcciones.
 
+
+## 5. Créditos
+- El script de instalación (`install` e `install.tar.gz`) no es de mi autoría. Todo el crédito corresponde a **RonR**, quien diseñó e implementó este instalador automatizado para FreePBX en Raspberry Pi. Agradecimientos por su contribución a la comunidad.
+
+## 6. Contacto
+Si tienes alguna duda o problema, por favor abre un *issue* en este repositorio.
