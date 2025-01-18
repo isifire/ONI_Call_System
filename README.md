@@ -9,7 +9,7 @@ Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y a
 2. [Configuración adicional](#2-configuración-adicional)
 3. [Licencia](#3-licencia)
 4. [Contribuciones](#4-contribuciones)
-5. [Créditos](5#-créditos)
+5. [Créditos](#5-créditos)
 6. [Contacto](#6-contacto)
 
 ## 1. Instalación de FreePBX en Raspberry Pi
