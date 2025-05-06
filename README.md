@@ -1,4 +1,4 @@
-# ONI Call System - TFG en Ingeniería Informática en TI
+# EXPLOTACIÓN DE VULNERABILIDADES EN COMUNICACIONES VOIP Y TÉCNICAS DE INGENIERÍA SOCIAL MEDIANTE ASTERISK
 ![Texto alternativo](img/oni_logo.webp "Título opcional")
 
 Este proyecto nace como Trabajo de Fin de Grado, con el objetivo de estudiar y aprender cómo se realizan las técnicas de Caller ID Spoofing, Smishing y clonación de voces con IA. Aquí se recopilan los diferentes materiales utilizados para el trabajo.
